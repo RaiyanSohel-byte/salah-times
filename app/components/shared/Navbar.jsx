@@ -34,11 +34,11 @@ export default function Navbar() {
     <nav
       className={`w-[320px] lg:w-[1100px] mt-6 px-4 md:px-0 ${nunito.className} fixed z-50 transition-all duration-300 ${
         solidBg ?
-          "bg-[#1b8a6b]/90 shadow-xl rounded-[20px]"
-        : "bg-white/20 backdrop-blur-md rounded-[20px]"
+          "bg-[#1b8a6b]/90 shadow-xl rounded-[20px] border border-white/20"
+        : "bg-white/20 backdrop-blur-md rounded-[20px] border border-white/20"
       }`}
     >
-      <div className="border border-white/20 rounded-[20px] px-6 md:px-11 py-[10px] flex items-center justify-between">
+      <div className="px-6 md:px-11 py-[10px] flex items-center justify-between">
         {/* Desktop Links - Hidden on Mobile */}
         <div className="hidden md:flex gap-8 text-white">
           {navLinks.map((link) => (
