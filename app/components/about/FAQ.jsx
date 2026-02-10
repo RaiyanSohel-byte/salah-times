@@ -25,13 +25,13 @@ const FAQ = () => {
         Why Trust Salaah-Times?
       </h1>
       <div className="space-y-6">
-        {faq.map((f) => (
-          <>
+        {faq.map((f, index) => (
+          <div key={index}>
             <h3 className="font-semibold text-base text-[#1E293B]">
               {f.title}
             </h3>
             <p className="text-base text-[#64748B]">{f.sub}</p>
-          </>
+          </div>
         ))}
       </div>
     </div>

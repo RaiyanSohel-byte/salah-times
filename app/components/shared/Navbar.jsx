@@ -15,41 +15,51 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
+  const isActive = (href) =>
+    pathname === href
+      ? "text-[#26FFA0] font-semibold"
+      : "hover:text-emerald-300 text-white";
+
   const links = (
     <>
       <Link
         href="/"
-        className="hover:text-emerald-300 transition-colors font-light text-xl"
+        className={`${isActive("/")} transition-colors font-light text-xl`}
       >
         Home
       </Link>
       <Link
         href="/find-mosque"
-        className="hover:text-emerald-300 transition-colors font-light text-xl"
+        className={`${isActive(
+          "/find-mosque"
+        )} transition-colors font-light text-xl`}
       >
         Find Mosque
       </Link>
       <Link
         href="/subscribe"
-        className="hover:text-emerald-300 transition-colors font-light text-xl"
+        className={`${isActive(
+          "/subscribe"
+        )} transition-colors font-light text-xl`}
       >
         Subscribe
       </Link>
       <Link
         href="/about"
-        className="hover:text-emerald-300 transition-colors font-light text-xl"
+        className={`${isActive("/about")} transition-colors font-light text-xl`}
       >
         About
       </Link>
       <Link
         href="/support"
-        className="hover:text-emerald-300 transition-colors font-light text-xl"
+        className={`${isActive(
+          "/support"
+        )} transition-colors font-light text-xl`}
       >
         Support
       </Link>
     </>
   );
-  // const isHome = pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -74,10 +84,10 @@ export default function Navbar() {
       }`}
     >
       <div className="px-6 md:px-11 py-[10px] flex items-center justify-between">
-        {/* Desktop Links - Hidden on Mobile */}
-        <div className="hidden md:flex gap-8 text-white">{links}</div>
+        {/* Desktop Links */}
+        <div className="hidden md:flex gap-8">{links}</div>
 
-        {/* Mobile Hamburger Icon */}
+        {/* Mobile Hamburger */}
         <div className="md:hidden flex items-center">
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -104,7 +114,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Menu */}
       <div
         className={`md:hidden absolute top-full left-4 right-4 mt-2 transition-all duration-300 ease-in-out transform ${
           isOpen
