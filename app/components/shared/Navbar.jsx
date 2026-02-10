@@ -49,7 +49,7 @@ export default function Navbar() {
       </Link>
     </>
   );
-  const isHome = pathname === "/";
+  // const isHome = pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,14 +61,16 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [pathname]);
 
-  const solidBg = !isHome || scrolled || isOpen;
+  const solidBg = scrolled || isOpen;
 
   return (
     <nav
-      className={`w-[320px] lg:w-[1100px] mt-6 px-4 md:px-0 ${nunito.className} fixed z-50 transition-all duration-300 ${
-        solidBg ?
-          "bg-[#1b8a6b]/90 shadow-xl rounded-[20px] border border-white/20"
-        : "bg-white/20 backdrop-blur-md rounded-[20px] border border-white/20"
+      className={`w-[320px] lg:w-[1100px] mt-6 px-4 md:px-0 ${
+        nunito.className
+      } fixed z-50 transition-all duration-300 ${
+        solidBg
+          ? "bg-[#1b8a6b]/90 shadow-xl rounded-[20px] border border-white/20"
+          : "bg-white/20 backdrop-blur-md rounded-[20px] border border-white/20"
       }`}
     >
       <div className="px-6 md:px-11 py-[10px] flex items-center justify-between">
@@ -81,9 +83,7 @@ export default function Navbar() {
             onClick={() => setIsOpen(!isOpen)}
             className="text-white focus:outline-none"
           >
-            {isOpen ?
-              <X size={32} />
-            : <Menu size={32} />}
+            {isOpen ? <X size={32} /> : <Menu size={32} />}
           </button>
         </div>
 
@@ -107,9 +107,9 @@ export default function Navbar() {
       {/* Mobile Menu Dropdown */}
       <div
         className={`md:hidden absolute top-full left-4 right-4 mt-2 transition-all duration-300 ease-in-out transform ${
-          isOpen ?
-            "opacity-100 translate-y-0"
-          : "opacity-0 -translate-y-4 pointer-events-none"
+          isOpen
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 -translate-y-4 pointer-events-none"
         }`}
       >
         <div className="bg-[#1b8a6b]/90 backdrop-blur-xl border border-white/20 rounded-[20px] p-6 flex flex-col gap-4 shadow-2xl text-white">
