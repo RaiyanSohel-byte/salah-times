@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import { MapPin, Lock, MessageCircle } from "lucide-react";
+import { MapPin, Lock, MessageCircle, Camera } from "lucide-react";
 import Link from "next/link";
 
 export default function UserProfile() {
   return (
-    <div className="min-h-screen max-w-7xl mx-auto  bg-[#F8F9FA] p-6 lg:p-12 text-slate-800">
+    <div className="min-h-screen max-w-7xl mx-auto bg-[#F8F9FA] p-6 lg:p-12 text-slate-800">
       {/* Page Header */}
       <header className="mb-8">
         <h1 className="text-2xl font-bold text-[#1E293B]">User Profile</h1>
@@ -19,13 +19,32 @@ export default function UserProfile() {
         {/* LEFT COLUMN - Profile Summary */}
         <div className="w-full lg:w-1/3">
           <div className="bg-white rounded-2xl p-8 shadow-[0_2px_15px_rgba(0,0,0,0.02)] border border-gray-100 flex flex-col items-center text-center">
-            <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-gray-50 mb-4 shadow-sm">
-              <img
-                src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"
-                alt="Abdullah Rahman"
-                className="w-full h-full object-cover"
-              />
+            {/* Avatar with Upload Button */}
+            <div className="relative mb-4">
+              <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-gray-50 shadow-sm">
+                <img
+                  src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"
+                  alt="Abdullah Rahman"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* Change Profile Picture Button */}
+              <label
+                htmlFor="profile-upload"
+                className="absolute bottom-1 right-1 bg-[#238B57] hover:bg-[#1a6e44] text-white p-2 rounded-full cursor-pointer shadow-md transition-colors border-2 border-white flex items-center justify-center hover:scale-105 active:scale-95"
+                title="Change Profile Picture"
+              >
+                <Camera size={14} />
+                <input
+                  id="profile-upload"
+                  type="file"
+                  className="hidden"
+                  accept="image/*"
+                />
+              </label>
             </div>
+
             <h2 className="text-xl font-bold text-[#1E293B]">
               Abdullah Rahman
             </h2>
