@@ -4,9 +4,11 @@ import Footer from "../components/shared/Footer";
 
 const layout = ({ children }) => {
   return (
-    <div className=" flex flex-col items-center">
+    <div className=" flex flex-col">
       {" "}
-      <Navbar />
+      <nav className="flex flex-col items-center">
+        <Navbar />
+      </nav>
       {children}
       <Footer />
     </div>

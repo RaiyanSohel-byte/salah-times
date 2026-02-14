@@ -6,13 +6,15 @@ import TrustAndSecurity from "@/app/components/about/TrustAndSecurity";
 
 const About = () => {
   return (
-    <>
+    <div>
       <AboutHeader />
-      <OurMission />
-      <HowWeCollect />
-      <TrustAndSecurity />
-      <FAQ />
-    </>
+      <div className="px-4 lg:px-0">
+        <OurMission />
+        <HowWeCollect />
+        <TrustAndSecurity />
+        <FAQ />
+      </div>
+    </div>
   );
 };
 
