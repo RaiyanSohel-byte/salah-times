@@ -3,6 +3,7 @@ import React from "react";
 import tick from "../../../public/icons/tick.png";
 import mosque from "../../../public/icons/mosque.png";
 import Image from "next/image";
+import Link from "next/link";
 const inter = Inter({
   subsets: ["latin"],
 });
@@ -65,9 +66,14 @@ const RegisterMosque = () => {
               prayer times
             </p>
           </div>
-          <button className="bg-[#1F8A5B] text-white font-medium text-[18px] w-full p-4 rounded-[14px] cursor-pointer">
-            Register Your Mosque
-          </button>
+          <div>
+            <Link
+              href="/register-mosque"
+              className="block w-full text-center bg-[#1F8A5B] text-white font-medium text-[18px] p-4 rounded-[14px] cursor-pointer"
+            >
+              Register Your Mosque
+            </Link>
+          </div>
         </div>
       </div>
     </section>

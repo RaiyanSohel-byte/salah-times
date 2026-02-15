@@ -2,303 +2,449 @@
 
 import React, { useState } from "react";
 import {
-  Mail,
-  MessageCircle,
-  Search,
-  CheckCircle2,
-  ChevronRight,
-  Bell,
-  MapPin,
   Check,
+  MapPin,
+  Mail,
+  Smartphone,
+  ChevronRight,
+  Clock,
+  Info,
+  Facebook,
+  Twitter,
+  Instagram,
+  Linkedin,
+  Send,
+  Globe,
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Inter, Lato } from "next/font/google";
 
-const SubscribeFlow = () => {
+const inter = Inter({ subsets: ["latin"] });
+const lato = Lato({ subsets: ["latin"], weight: ["400", "700", "900"] });
+
+// --- Data Structures ---
+const PRAYERS = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"];
+
+const FACILITIES = [
+  { id: "wudu", label: "Wudu Area" },
+  { id: "parking", label: "Parking" },
+  { id: "ac", label: "AC" },
+  { id: "ladies", label: "Ladies Section" },
+  { id: "wheelchair", label: "Wheelchair Access" },
+  { id: "library", label: "Library" },
+];
+
+export default function RegisterMosqueFlow() {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
-    method: "",
-    mosque: "",
-    preferences: ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"],
+    mosqueName: "",
+    contactPerson: "",
+    email: "",
+    phone: "",
+    address: "",
+    area: "",
+    facilities: [],
   });
 
-  const steps = [
-    { id: 1, label: "Method" },
-    { id: 2, label: "Mosque" },
-    { id: 3, label: "Preferences" },
-  ];
-
-  const handleNext = () => setStep((prev) => prev + 1);
-
-  // --- Sub-Components (Internal to the main component) ---
-
-  const StepIndicator = () => (
-    <div className="flex items-center justify-center mb-10 relative max-w-sm mx-auto">
-      <div className="absolute top-5 left-0 w-full h-[2px] bg-gray-100 -z-0"></div>
-      {steps.map((s) => (
-        <div
-          key={s.id}
-          className="relative z-10 flex flex-col items-center flex-1"
-        >
-          <div
-            className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-500 border-4 ${
-              step >= s.id ?
-                "bg-[#10b981] border-emerald-100 text-white"
-              : "bg-white border-gray-100 text-gray-400"
-            }`}
-          >
-            {step > s.id ?
-              <Check size={18} strokeWidth={3} />
-            : s.id}
-          </div>
-          <span
-            className={`text-[11px] mt-2 font-bold uppercase tracking-wider ${
-              step >= s.id ? "text-[#065f46]" : "text-gray-400"
-            }`}
-          >
-            {s.label}
-          </span>
-        </div>
-      ))}
-    </div>
-  );
+  const nextStep = () => setStep((prev) => Math.min(prev + 1, 5));
+  const prevStep = () => setStep((prev) => Math.max(prev - 1, 1));
 
   return (
-    <div className="min-h-screen bg-[#fcfdfd] font-sans text-slate-900">
-      {/* Top Banner Section */}
-      <section className="bg-gradient-to-br from-[#065f46] via-[#065f46] to-[#0d9488] pt-20 pb-40 px-6 text-center">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-4 tracking-tight">
-            Subscribe{" "}
-            <span className="font-light text-emerald-200">to Prayer Times</span>
-          </h1>
-          <p className="text-emerald-50/80 text-sm md:text-base max-w-md mx-auto leading-relaxed">
-            Stay connected with your local community. Never miss a prayer with
-            our automated smart notifications.
-          </p>
-        </div>
-      </section>
+    <div className={`min-h-screen bg-[#F8FAFC] flex flex-col `}>
+      {/* Hero Header Section */}
+      <div className="py-[196px] text-center bg-gradient-to-b from-[#1F8A5B] to-[#1F6F8B] w-full">
+        <h1
+          className={`font-bold text-4xl lg:text-[66px] text-white ${lato.className}`}
+        >
+          <span className="text-[#26FFA0] italic">Register</span> Your Mosque
+        </h1>
+        <p className={`lg:text-2xl text-[#D0E0FF] ${inter.className} mt-4`}>
+          Join our platform and help your community stay connected
+        </p>
+      </div>
 
-      {/* Main Container */}
-      <main className="max-w-[850px] mx-auto -mt-24 px-4 pb-24">
-        <div className="bg-white rounded-[40px] shadow-[0_20px_50px_rgba(0,0,0,0.05)] p-8 md:p-14 border border-gray-50 relative overflow-hidden">
-          {/* Subtle Background Accent */}
-          <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-50/50 rounded-full -mr-16 -mt-16 blur-3xl"></div>
-
-          <StepIndicator />
-
-          <AnimatePresence mode="wait">
-            {/* STEP 1: METHOD */}
-            {step === 1 && (
-              <motion.div
-                key="step1"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="text-center"
-              >
-                <h2 className="text-2xl font-bold text-gray-800 mb-2">
-                  Choose Notification Method
-                </h2>
-                <p className="text-gray-500 mb-10 text-sm">
-                  Select how you would like to receive your daily alerts
-                </p>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <button
-                    onClick={() => {
-                      setFormData({ ...formData, method: "WhatsApp" });
-                      handleNext();
-                    }}
-                    className="group relative p-8 border-2 border-gray-100 rounded-3xl hover:border-emerald-500 hover:bg-emerald-50/30 transition-all duration-300 text-left"
+      {/* --- MAIN FORM CARD --- */}
+      <main className="flex-grow px-4 mt-[120px] relative z-20 pb-24">
+        <div className="max-w-[840px] mx-auto bg-white rounded-[40px] shadow-[0_32px_64px_-12px_rgba(0,0,0,0.12)] p-8 md:p-14 border border-white/50">
+          {/* STEPPER INDICATOR */}
+          {step < 5 && (
+            <div className="flex items-center justify-between mb-16 max-w-[600px] mx-auto relative">
+              <div className="absolute top-4 left-0 w-full h-[3px] bg-slate-100 -z-0 rounded-full" />
+              <div
+                className="absolute top-4 left-0 h-[3px] bg-[#238B57] transition-all duration-700 ease-in-out -z-0 rounded-full"
+                style={{ width: `${((step - 1) / 3) * 100}%` }}
+              />
+              {["Basic Info", "Location", "Prayer Times", "Details"].map(
+                (label, idx) => (
+                  <div
+                    key={label}
+                    className="flex flex-col items-center relative z-10 bg-white px-2"
                   >
-                    <div className="w-14 h-14 bg-emerald-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                      <MessageCircle className="text-emerald-600" size={28} />
+                    <div
+                      className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 ${step >= idx + 1 ? "bg-[#238B57] text-white" : "bg-slate-100 text-slate-400"}`}
+                    >
+                      {step > idx + 1 ?
+                        <Check size={16} strokeWidth={3} />
+                      : idx + 1}
                     </div>
-                    <h3 className="text-lg font-bold text-gray-800">
-                      WhatsApp
-                    </h3>
-                    <p className="text-sm text-gray-500 mt-1">
-                      Instant alerts directly to your mobile app.
-                    </p>
-                  </button>
+                    <span
+                      className={`text-[11px] font-bold mt-3 uppercase tracking-widest ${step >= idx + 1 ? "text-[#238B57]" : "text-slate-400"}`}
+                    >
+                      {label}
+                    </span>
+                  </div>
+                ),
+              )}
+            </div>
+          )}
 
-                  <button
-                    onClick={() => {
-                      setFormData({ ...formData, method: "Email" });
-                      handleNext();
-                    }}
-                    className="group relative p-8 border-2 border-gray-100 rounded-3xl hover:border-emerald-500 hover:bg-emerald-50/30 transition-all duration-300 text-left"
-                  >
-                    <div className="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                      <Mail className="text-blue-600" size={28} />
-                    </div>
-                    <h3 className="text-lg font-bold text-gray-800">
-                      Email Address
-                    </h3>
-                    <p className="text-sm text-gray-500 mt-1">
-                      Daily schedule sent to your inbox every morning.
-                    </p>
-                  </button>
-                </div>
-              </motion.div>
-            )}
+          {/* STEP 1: BASIC INFO */}
+          {step === 1 && (
+            <div className="animate-in fade-in slide-in-from-bottom-6 duration-500">
+              <h2 className="text-2xl font-bold text-slate-900 mb-2">
+                Basic Information
+              </h2>
+              <p className="text-slate-500 mb-10">Tell us about your mosque</p>
 
-            {/* STEP 2: MOSQUE */}
-            {step === 2 && (
-              <motion.div
-                key="step2"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="max-w-xl mx-auto"
-              >
-                <div className="text-center mb-8">
-                  <h2 className="text-2xl font-bold text-gray-800 mb-2">
-                    Select Your Mosque
-                  </h2>
-                  <p className="text-gray-500 text-sm">
-                    Find the mosque you want to follow prayer times for
-                  </p>
-                </div>
-
-                <div className="relative mb-6">
-                  <Search
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-                    size={20}
-                  />
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
+                <div className="space-y-2">
+                  <label className="text-sm font-bold text-slate-700">
+                    Mosque Name *
+                  </label>
                   <input
                     type="text"
-                    placeholder="Search by mosque name, city, or zip code..."
-                    className="w-full pl-12 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl focus:ring-2 focus:ring-emerald-500 focus:bg-white outline-none transition-all"
+                    placeholder="Enter mosque name"
+                    className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#238B57]/10 focus:border-[#238B57] transition-all"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-bold text-slate-700">
+                    Phone Number *
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="+880 16XXXXXXXX"
+                    className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#238B57]/10 focus:border-[#238B57] transition-all"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-bold text-slate-700">
+                    Contact Person *
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Your name"
+                    className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#238B57]/10 focus:border-[#238B57] transition-all"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-bold text-slate-700">
+                    Email Address *
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="mosque@example.com"
+                    className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#238B57]/10 focus:border-[#238B57] transition-all"
+                  />
+                </div>
+              </div>
+
+              <button
+                onClick={nextStep}
+                className="w-full py-5 bg-[#238B57] text-white font-bold rounded-2xl shadow-xl shadow-green-900/10 hover:bg-[#1a6d44] transition-all"
+              >
+                Continue to Location
+              </button>
+            </div>
+          )}
+
+          {/* STEP 2: LOCATION */}
+          {step === 2 && (
+            <div className="animate-in fade-in slide-in-from-bottom-6 duration-500">
+              <h2 className="text-2xl font-bold text-slate-900 mb-2">
+                Location Details
+              </h2>
+              <p className="text-slate-500 mb-10">
+                Where is your mosque located?
+              </p>
+
+              <div className="space-y-6 mb-10">
+                <div className="space-y-2">
+                  <label className="text-sm font-bold text-slate-700">
+                    Full Address *
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Street address, building name, etc."
+                    className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:border-[#238B57]"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-bold text-slate-700">
+                    Area/District *
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g., Uttara, Gulshan, Mohammadpur"
+                    className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:border-[#238B57]"
                   />
                 </div>
 
-                <div className="space-y-3 max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
-                  {[
-                    "Baitul Mukarram National Mosque",
-                    "Mohakhali Central Mosque",
-                    "Gulshan Society Mosque",
-                  ].map((mosque) => (
-                    <div
-                      key={mosque}
-                      className="flex items-center justify-between p-4 border border-gray-100 rounded-2xl hover:border-emerald-200 hover:bg-emerald-50/20 transition-all group"
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 bg-gray-100 rounded-xl flex items-center justify-center group-hover:bg-emerald-100 transition-colors">
-                          <MapPin
-                            size={18}
-                            className="text-gray-500 group-hover:text-emerald-600"
+                <div className="bg-[#F0F9FF] border border-[#E0F2FE] rounded-2xl p-5 flex gap-4">
+                  <div className="text-blue-500">
+                    <Info size={24} />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-slate-900">
+                      Location Tips
+                    </h4>
+                    <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                      Provide detailed address information to help people find
+                      your mosque easily. Include nearby landmarks if possible.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex gap-4">
+                <button
+                  onClick={prevStep}
+                  className="flex-1 py-4 text-slate-500 font-bold bg-slate-50 rounded-xl"
+                >
+                  Back
+                </button>
+                <button
+                  onClick={nextStep}
+                  className="flex-[2] py-4 bg-[#238B57] text-white font-bold rounded-xl"
+                >
+                  Continue to Prayer Times
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* STEP 3: PRAYER TIMES */}
+          {step === 3 && (
+            <div className="animate-in fade-in slide-in-from-bottom-6 duration-500">
+              <h2 className="text-2xl font-bold text-slate-900 mb-2">
+                Prayer Times
+              </h2>
+              <p className="text-slate-500 mb-10">
+                Enter your mosque's prayer schedule
+              </p>
+
+              <div className="overflow-hidden border border-slate-100 rounded-2xl mb-10">
+                <table className="w-full text-left border-collapse">
+                  <thead>
+                    <tr className="bg-slate-50 text-slate-400 text-[11px] font-bold uppercase tracking-wider">
+                      <th className="px-6 py-4">Prayer</th>
+                      <th className="px-6 py-4">Beginning Time</th>
+                      <th className="px-6 py-4">Iqamah Time (Optional)</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-50">
+                    {PRAYERS.map((prayer) => (
+                      <tr key={prayer}>
+                        <td className="px-6 py-5 font-bold text-slate-700 text-sm">
+                          {prayer}
+                        </td>
+                        <td className="px-6 py-5">
+                          <input
+                            type="text"
+                            placeholder="00:00 AM"
+                            className="w-full text-sm bg-transparent border-b border-slate-100 focus:border-[#238B57] focus:outline-none pb-1"
                           />
-                        </div>
-                        <span className="font-semibold text-gray-700">
-                          {mosque}
-                        </span>
+                        </td>
+                        <td className="px-6 py-5">
+                          <input
+                            type="text"
+                            placeholder="00:00 AM"
+                            className="w-full text-sm bg-transparent border-b border-slate-100 focus:border-[#238B57] focus:outline-none pb-1"
+                          />
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <div className="flex gap-4">
+                <button
+                  onClick={prevStep}
+                  className="flex-1 py-4 text-slate-500 font-bold bg-slate-50 rounded-xl"
+                >
+                  Back
+                </button>
+                <button
+                  onClick={nextStep}
+                  className="flex-[2] py-4 bg-[#238B57] text-white font-bold rounded-xl shadow-lg shadow-green-900/10"
+                >
+                  Continue to Details
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* STEP 4: ADDITIONAL DETAILS */}
+          {step === 4 && (
+            <div className="animate-in fade-in slide-in-from-bottom-6 duration-500">
+              <h2 className="text-2xl font-bold text-slate-900 mb-2">
+                Additional Details
+              </h2>
+              <p className="text-slate-500 mb-10">
+                Tell us more about your mosque's facilities
+              </p>
+
+              <div className="mb-8">
+                <h3 className="text-sm font-bold text-slate-800 mb-6">
+                  Facilities Available
+                </h3>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  {FACILITIES.map((facility) => (
+                    <div
+                      key={facility.id}
+                      className="flex items-center gap-3 p-4 bg-slate-50 rounded-xl hover:bg-white border border-transparent hover:border-slate-100 transition-all group cursor-pointer"
+                    >
+                      <div className="w-5 h-5 rounded border-2 border-slate-200 bg-white flex items-center justify-center group-hover:border-[#238B57]">
+                        {/* Hidden checkbox logic here */}
                       </div>
-                      <button
-                        onClick={() => {
-                          setFormData({ ...formData, mosque });
-                          handleNext();
-                        }}
-                        className="bg-[#065f46] text-white px-5 py-2 rounded-xl text-sm font-bold hover:bg-emerald-800 shadow-md active:scale-95 transition-all"
-                      >
-                        Select
-                      </button>
+                      <span className="text-sm font-medium text-slate-600 group-hover:text-slate-900">
+                        {facility.label}
+                      </span>
                     </div>
                   ))}
                 </div>
-              </motion.div>
-            )}
+              </div>
 
-            {/* STEP 3: PREFERENCES */}
-            {step === 3 && (
-              <motion.div
-                key="step3"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="max-w-xl mx-auto"
-              >
-                <div className="text-center mb-10">
-                  <h2 className="text-2xl font-bold text-gray-800 mb-2">
-                    Prayer Preferences
-                  </h2>
-                  <p className="text-gray-500 text-sm">
-                    Which prayer alerts would you like to receive?
+              <div className="space-y-2 mb-10">
+                <label className="text-sm font-bold text-slate-700">
+                  Additional Information
+                </label>
+                <textarea
+                  rows={4}
+                  placeholder="Any other details about your mosque (capacity, special programs, etc.)"
+                  className="w-full px-5 py-4 bg-slate-50 border border-slate-200 rounded-2xl focus:border-[#238B57] outline-none transition-all"
+                />
+              </div>
+
+              <div className="bg-[#F0FDF4] border border-[#DCFCE7] rounded-2xl p-6 mb-10 flex gap-4">
+                <div className="bg-[#238B57] text-white w-10 h-10 rounded-full flex items-center justify-center shrink-0">
+                  <Smartphone size={18} />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-slate-900">
+                    What happens next?
+                  </h4>
+                  <p className="text-xs text-slate-500 mt-1 leading-relaxed">
+                    After clicking continue, you'll be redirected to WhatsApp to
+                    communicate with our admin team. They will verify your
+                    details and provide you with access to the mosque portal.
                   </p>
                 </div>
+              </div>
 
-                <div className="grid grid-cols-2 gap-4 mb-10">
-                  {["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"].map(
-                    (prayer) => (
-                      <label
-                        key={prayer}
-                        className="relative flex items-center justify-between p-4 bg-gray-50 rounded-2xl cursor-pointer hover:bg-emerald-50 border-2 border-transparent has-[:checked]:border-emerald-500 has-[:checked]:bg-emerald-50 transition-all"
-                      >
-                        <span className="font-bold text-gray-700">
-                          {prayer}
-                        </span>
-                        <input
-                          type="checkbox"
-                          defaultChecked
-                          className="w-6 h-6 accent-emerald-600 rounded-lg"
-                        />
-                      </label>
-                    ),
-                  )}
-                </div>
-
+              <div className="flex gap-4">
                 <button
-                  onClick={handleNext}
-                  className="w-full bg-[#10b981] hover:bg-[#059669] text-white font-bold py-5 rounded-2xl shadow-xl shadow-emerald-200 transition-all active:scale-[0.98] flex items-center justify-center gap-2"
+                  onClick={prevStep}
+                  className="flex-1 py-4 text-slate-500 font-bold bg-slate-50 rounded-xl"
                 >
-                  Complete Registration <ChevronRight size={20} />
+                  Back
                 </button>
-              </motion.div>
-            )}
+                <button
+                  onClick={nextStep}
+                  className="flex-[2] py-4 bg-[#238B57] text-white font-bold rounded-xl flex items-center justify-center gap-2"
+                >
+                  Continue to WhatsApp <Send size={18} />
+                </button>
+              </div>
+            </div>
+          )}
 
-            {/* STEP 4: SUCCESS */}
-            {step === 4 && (
-              <motion.div
-                key="step4"
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                className="text-center py-6"
+          {/* SUCCESS MESSAGE */}
+          {step === 5 && (
+            <div className="animate-in zoom-in-95 duration-700 text-center py-10">
+              <div className="w-24 h-24 bg-[#F0FDF4] text-[#238B57] rounded-full flex items-center justify-center mx-auto mb-8">
+                <Check size={48} strokeWidth={4} />
+              </div>
+              <h2 className="text-3xl font-black text-slate-900 mb-4 tracking-tight">
+                Request Submitted!
+              </h2>
+              <p className="text-slate-500 max-w-md mx-auto leading-relaxed mb-10">
+                Your mosque registration request has been sent. We will review
+                the information and get back to you shortly.
+              </p>
+              <button
+                onClick={() => setStep(1)}
+                className="px-12 py-4 bg-[#238B57] text-white font-bold rounded-xl"
               >
-                <div className="w-24 h-24 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-8 shadow-inner">
-                  <CheckCircle2 size={56} strokeWidth={1.5} />
-                </div>
-                <h2 className="text-3xl font-extrabold text-gray-800 mb-3">
-                  Successfully Subscribed!
-                </h2>
-                <p className="text-gray-500 mb-10 max-w-xs mx-auto">
-                  You are now set up to receive {formData.method} alerts for{" "}
-                  <span className="font-bold text-gray-700">
-                    {formData.mosque}
-                  </span>
-                  .
-                </p>
-                <button
-                  onClick={() => setStep(1)}
-                  className="inline-flex items-center gap-2 text-[#065f46] font-bold hover:text-emerald-700 transition-colors border-b-2 border-emerald-100 hover:border-[#065f46] pb-1"
-                >
-                  Go to Dashboard <ChevronRight size={18} />
-                </button>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                Return Home
+              </button>
+            </div>
+          )}
         </div>
-
-        {/* Help Link */}
-        <p className="text-center mt-8 text-gray-400 text-sm">
-          Having trouble?{" "}
-          <a
-            href="#"
-            className="text-emerald-600 font-semibold hover:underline"
-          >
-            Contact Support
-          </a>
-        </p>
       </main>
+
+      {/* --- FOOTER --- */}
+      <footer className="bg-white border-t border-slate-100 pt-20 pb-10">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          <div>
+            <div className="flex items-center gap-2 font-bold text-xl mb-6">
+              <div className="w-8 h-8 bg-[#238B57] rounded-full flex items-center justify-center text-white text-lg">
+                🕌
+              </div>
+              <span className="text-slate-900">Prayer Times</span>
+            </div>
+            <p className="text-slate-500 text-sm leading-relaxed mb-8">
+              The world's most accurate prayer time app for muslims around the
+              world.
+            </p>
+            <div className="flex gap-4">
+              {[Facebook, Twitter, Instagram, Linkedin].map((Icon, i) => (
+                <a
+                  key={i}
+                  href="#"
+                  className="w-10 h-10 bg-slate-50 rounded-full flex items-center justify-center text-slate-400 hover:bg-[#238B57] hover:text-white transition-all"
+                >
+                  <Icon size={18} />
+                </a>
+              ))}
+            </div>
+          </div>
+          {/* Footer columns... */}
+          <div>
+            <h4 className="font-bold text-slate-900 mb-8">Quick Links</h4>
+            <ul className="space-y-4 text-sm text-slate-500">
+              <li>Home</li>
+              <li>Find Mosque</li>
+              <li>About Us</li>
+              <li>Support</li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-bold text-slate-900 mb-8">Contact Us</h4>
+            <ul className="space-y-4 text-sm text-slate-500">
+              <li className="flex items-center gap-3">
+                <Mail size={16} /> info@prayertime.com
+              </li>
+              <li className="flex items-center gap-3">
+                <Smartphone size={16} /> +880 123 456 789
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-bold text-slate-900 mb-8">Newsletter</h4>
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Email Address"
+                className="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:outline-none"
+              />
+              <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-[#238B57] text-white p-1.5 rounded-lg">
+                <Send size={16} />
+              </button>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
-};
-
-export default SubscribeFlow;
+}
