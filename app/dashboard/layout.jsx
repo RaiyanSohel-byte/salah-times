@@ -15,6 +15,7 @@ import {
   MessageCircle,
 } from "lucide-react";
 import Image from "next/image";
+import Footer from "../components/shared/Footer";
 
 const navItems = [
   {
@@ -41,49 +42,50 @@ export default function DashboardLayout({ children }) {
   const pathname = usePathname();
   console.log(pathname);
   return (
-    <div className="min-h-screen bg-[#F8F9FA] flex text-slate-700">
-      {/* MOBILE OVERLAY */}
-      {isSidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 lg:hidden"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
+    <>
+      <div className="bg-[#F8F9FA] flex text-slate-700">
+        {/* MOBILE OVERLAY */}
+        {isSidebarOpen && (
+          <div
+            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 lg:hidden"
+            onClick={() => setSidebarOpen(false)}
+          />
+        )}
 
-      {/* SIDEBAR */}
-      <aside
-        className={`
+        {/* SIDEBAR */}
+        <aside
+          className={`
         fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-100 transform transition-transform duration-300 ease-in-out
         lg:relative lg:translate-x-0
         ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
       `}
-      >
-        <div className="flex flex-col h-full">
-          {/* Logo Section */}
-          <Link href="/" className="p-6 flex items-center gap-3">
-            <Image
-              src={logo}
-              alt="Logo"
-              width={36}
-              height={36}
-              className="rounded-full"
-            />
-            <span className="font-semibold text-[#1E293B] text-lg">
-              My Dashboard
-            </span>
-          </Link>
+        >
+          <div className="flex flex-col h-full">
+            {/* Logo Section */}
+            <Link href="/" className="p-6 flex items-center gap-3">
+              <Image
+                src={logo}
+                alt="Logo"
+                width={36}
+                height={36}
+                className="rounded-full"
+              />
+              <span className="font-semibold text-[#1E293B] text-lg">
+                My Dashboard
+              </span>
+            </Link>
 
-          {/* Navigation Links */}
-          <nav className="flex-1 px-4 space-y-1 mt-4">
-            {navItems.map((item) => {
-              const isActive =
-                pathname === item.href ||
-                (item.name === "Favorite Mosques" && pathname === "/");
-              return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`
+            {/* Navigation Links */}
+            <nav className="flex-1 px-4 space-y-1 mt-4">
+              {navItems.map((item) => {
+                const isActive =
+                  pathname === item.href ||
+                  (item.name === "Favorite Mosques" && pathname === "/");
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`
                     flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200
                     ${
                       isActive ?
@@ -91,66 +93,68 @@ export default function DashboardLayout({ children }) {
                       : "text-slate-500 hover:bg-gray-50 hover:text-slate-800"
                     }
                   `}
-                >
-                  <item.icon
-                    size={20}
-                    className={isActive ? "text-[#238B57]" : "text-slate-400"}
-                  />
-                  <span className="text-[14px]">{item.name}</span>
-                </Link>
-              );
-            })}
-          </nav>
+                  >
+                    <item.icon
+                      size={20}
+                      className={isActive ? "text-[#238B57]" : "text-slate-400"}
+                    />
+                    <span className="text-[14px]">{item.name}</span>
+                  </Link>
+                );
+              })}
+            </nav>
 
-          {/* Logout Section */}
-          <div className="p-4 border-t border-gray-50">
-            <button className="flex items-center gap-3 px-4 py-3 w-full text-red-500 hover:bg-red-50 rounded-xl transition-colors">
-              <LogOut size={20} />
-              <span className="text-[14px] font-semibold">Logout</span>
-            </button>
-          </div>
-        </div>
-      </aside>
-
-      {/* MAIN CONTENT AREA */}
-      <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
-        {/* HEADER / TOP NAV */}
-        <header className="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-6 lg:px-12 shrink-0">
-          <button
-            className="lg:hidden p-2 text-slate-500"
-            onClick={() => setSidebarOpen(true)}
-          >
-            <Menu size={24} />
-          </button>
-
-          {/* Desktop Nav Links */}
-          <nav className="hidden lg:flex items-center gap-8 ml-auto mr-12">
-            {topNavItems.map((item, index) => (
-              <Link
-                key={index}
-                href={item.href}
-                className="text-[15px] font-medium text-slate-500 hover:text-[#238B57] transition-colors"
-              >
-                {item.name}
-              </Link>
-            ))}
-          </nav>
-
-          {/* User Profile */}
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-100 cursor-pointer shadow-sm">
-              <img
-                src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"
-                alt="User profile"
-                className="w-full h-full object-cover"
-              />
+            {/* Logout Section */}
+            <div className="p-4 border-t border-gray-50">
+              <button className="flex items-center gap-3 px-4 py-3 w-full text-red-500 hover:bg-red-50 rounded-xl transition-colors">
+                <LogOut size={20} />
+                <span className="text-[14px] font-semibold">Logout</span>
+              </button>
             </div>
           </div>
-        </header>
+        </aside>
 
-        {/* PAGE CONTENT SCROLL AREA */}
-        <main className="overflow-y-auto p-6 lg:p-12 relative">{children}</main>
+        {/* MAIN CONTENT AREA */}
+        <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
+          {/* HEADER / TOP NAV */}
+          <header className="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-6 lg:px-12 shrink-0">
+            <button
+              className="lg:hidden p-2 text-slate-500"
+              onClick={() => setSidebarOpen(true)}
+            >
+              <Menu size={24} />
+            </button>
+
+            {/* Desktop Nav Links */}
+            <nav className="hidden lg:flex items-center gap-8 ml-auto mr-12">
+              {topNavItems.map((item, index) => (
+                <Link
+                  key={index}
+                  href={item.href}
+                  className="text-[15px] font-medium text-slate-500 hover:text-[#238B57] transition-colors"
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </nav>
+
+            {/* User Profile */}
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-100 cursor-pointer shadow-sm">
+                <img
+                  src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"
+                  alt="User profile"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </header>
+
+          {/* PAGE CONTENT SCROLL AREA */}
+          <main className="p-6 lg:p-12 relative">{children}</main>
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
