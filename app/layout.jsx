@@ -1,7 +1,7 @@
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import { MessageCircle } from "lucide-react";
 import FloatingChatButton from "./components/shared/FloatingChatButton";
+import { AxiosProvider } from "./providers/AxiosProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -17,8 +17,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="light">
       <body className={`${poppins.className} antialiased`}>
-        {children} {/* Floating Action Button */}
-        <FloatingChatButton />
+        <AxiosProvider>
+          {children}
+
+          {/* Floating Action Button */}
+          <FloatingChatButton />
+        </AxiosProvider>
       </body>
     </html>
   );
