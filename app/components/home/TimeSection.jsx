@@ -42,9 +42,9 @@ const TimeSection = () => {
   ];
   return (
     <div
-      className={`lg:w-[1216px] bg-white lg:shadow-xl lg:rounded-2xl ${poppins.className} p-6 lg:shadow-2xl mt-4 lg:mt-14`}
+      className={`lg:w-[1216px] bg-white md:shadow-xl md:rounded-2xl ${poppins.className} p-6 md:shadow-2xl mt-4 md:mt-14`}
     >
-      <div className="lg:flex justify-between">
+      <div className="md:flex justify-between">
         <div>
           <h1 className="text-[24px] font-semibold mb-[3px]">
             Today's{" "}
@@ -52,7 +52,7 @@ const TimeSection = () => {
             Prayer Times
           </h1>
           <p
-            className={`text-[#64748B] ${inter.className} text-base flex items-center gap-1 mb-4 lg:mb-0`}
+            className={`text-[#64748B] ${inter.className} text-base flex items-center gap-1 mb-4 md:mb-0`}
           >
             <Image src={calendar} width={16} height={16} alt="calendar" />{" "}
             Thursday, January 22, 2026
@@ -65,7 +65,7 @@ const TimeSection = () => {
       </div>
 
       {/* Time Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-6 gap-4 mt-2 lg:mt-6">
+      <div className="grid grid-cols-2 md:grid-cols-6 gap-4 mt-2 md:mt-6">
         {times.map((time, index) => (
           <TimeCard key={index} time={time} />
         ))}
@@ -75,7 +75,7 @@ const TimeSection = () => {
       <div
         className={`bg-gradient-to-br from-[#E9F5F0] to-[#EEF7FB] p-4 ${inter.className} rounded-[14px] mt-6`}
       >
-        <div className="lg:flex justify-between items-center space-y-2 lg:space-y-0">
+        <div className="md:flex justify-between items-center space-y-2 md:space-y-0">
           {/* Subscribe Texts */}
           <div>
             <h3 className="text-base font-medium text-[#1E293B]">

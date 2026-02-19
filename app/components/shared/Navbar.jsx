@@ -92,7 +92,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`w-[320px] lg:w-[1100px] mt-6 px-4 md:px-0 ${
+      className={`w-[320px] md:w-[1100px] mt-6 px-4 md:px-0 ${
         nunito.className
       } fixed z-50 transition-all duration-300 ${
         solidBg ?
