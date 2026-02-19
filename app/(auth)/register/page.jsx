@@ -19,7 +19,7 @@ export default function SignUpPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   return (
-    <div className="w-full lg:w-1/2 flex items-center justify-center bg-white p-8 lg:p-16">
+    <div className="w-full md:w-1/2 flex items-center justify-center bg-white p-8 md:p-16">
       <div className="w-full max-w-md space-y-8">
         {/* Header */}
         <div className="text-center">

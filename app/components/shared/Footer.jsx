@@ -16,11 +16,11 @@ const nunito = Nunito({ subsets: ["latin"] });
 export default function Footer() {
   return (
     <footer
-      className={`${nunito.className} bg-white pt-16 pb-8 px-4 md:px-10 border-t border-gray-100 lg:mt-25`}
+      className={`${nunito.className} bg-white pt-16 pb-8 px-4 md:px-10 border-t border-gray-100 md:mt-25`}
     >
       <div className="max-w-7xl mx-auto">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 md:grid-cols-4 gap-12 md:gap-8 mb-12">
           {/* Section 1: Logo & Socials */}
           <div className="flex flex-col gap-6">
             <div className="relative w-24 h-24">

@@ -6,7 +6,7 @@ import Link from "next/link";
 
 export default function UserProfile() {
   return (
-    <div className="min-h-screen max-w-7xl mx-auto bg-[#F8F9FA] p-6 lg:p-12 text-slate-800">
+    <div className="min-h-screen max-w-7xl mx-auto bg-[#F8F9FA] p-6 md:p-12 text-slate-800">
       {/* Page Header */}
       <header className="mb-8">
         <h1 className="text-2xl font-bold text-[#1E293B]">User Profile</h1>
@@ -15,15 +15,15 @@ export default function UserProfile() {
         </p>
       </header>
 
-      <div className="flex flex-col lg:flex-row gap-6">
+      <div className="flex flex-col md:flex-row gap-6">
         {/* LEFT COLUMN - Profile Summary */}
-        <div className="w-full lg:w-1/3">
+        <div className="w-full md:w-1/3">
           <div className="bg-white rounded-2xl p-8 shadow-[0_2px_15px_rgba(0,0,0,0.02)] border border-gray-100 flex flex-col items-center text-center">
             {/* Avatar with Upload Button */}
             <div className="relative mb-4">
               <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-gray-50 shadow-sm">
                 <img
-                  src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"
+                  src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
                   alt="Abdullah Rahman"
                   className="w-full h-full object-cover"
                 />
@@ -60,7 +60,7 @@ export default function UserProfile() {
         </div>
 
         {/* RIGHT COLUMN - Forms */}
-        <div className="w-full lg:w-2/3 space-y-6">
+        <div className="w-full md:w-2/3 space-y-6">
           {/* Personal Information Form */}
           <div className="bg-white rounded-2xl p-8 shadow-[0_2px_15px_rgba(0,0,0,0.02)] border border-gray-100">
             <h3 className="text-[17px] font-bold text-[#1E293B] mb-6">

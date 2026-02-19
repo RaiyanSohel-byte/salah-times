@@ -46,7 +46,7 @@ export default function DashboardLayout({ children }) {
         {/* MOBILE OVERLAY */}
         {isSidebarOpen && (
           <div
-            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 lg:hidden"
+            className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 md:hidden"
             onClick={() => setSidebarOpen(false)}
           />
         )}
@@ -55,7 +55,7 @@ export default function DashboardLayout({ children }) {
         <aside
           className={`
         fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-gray-100 transform transition-transform duration-300 ease-in-out
-        lg:relative lg:translate-x-0
+        md:relative md:translate-x-0
         ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
       `}
         >
@@ -114,18 +114,18 @@ export default function DashboardLayout({ children }) {
         </aside>
 
         {/* MAIN CONTENT AREA */}
-        <div className="flex-1 flex flex-col min-w-0 h-screen lg:overflow-hidden">
+        <div className="flex-1 flex flex-col min-w-0 h-screen md:overflow-hidden">
           {/* HEADER / TOP NAV */}
-          <header className="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-6 lg:px-12 shrink-0">
+          <header className="h-20 bg-white border-b border-gray-100 flex items-center justify-between px-6 md:px-12 shrink-0">
             <button
-              className="lg:hidden p-2 text-slate-500"
+              className="md:hidden p-2 text-slate-500"
               onClick={() => setSidebarOpen(true)}
             >
               <Menu size={24} />
             </button>
 
             {/* Desktop Nav Links */}
-            <nav className="hidden lg:flex items-center gap-8 ml-auto mr-12">
+            <nav className="hidden md:flex items-center gap-8 ml-auto mr-12">
               {topNavItems.map((item, index) => (
                 <Link
                   key={index}
@@ -139,9 +139,9 @@ export default function DashboardLayout({ children }) {
 
             {/* User Profile */}
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-100 cursor-pointer shadow-sm">
+              <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-black cursor-pointer shadow-sm">
                 <img
-                  src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"
+                  src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
                   alt="User profile"
                   className="w-full h-full object-cover"
                 />
@@ -150,7 +150,7 @@ export default function DashboardLayout({ children }) {
           </header>
 
           {/* PAGE CONTENT SCROLL AREA */}
-          <main className="p-3 lg:p-12 relative">{children}</main>
+          <main className="p-3 md:p-12 relative">{children}</main>
         </div>
       </div>
     </>

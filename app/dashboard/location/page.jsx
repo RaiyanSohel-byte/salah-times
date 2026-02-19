@@ -5,7 +5,7 @@ import { MapPin } from "lucide-react";
 
 export default function LocationManagement() {
   return (
-    <div className="min-h-screen bg-[#F8F9FA] p-6 lg:p-12">
+    <div className="min-h-screen bg-[#F8F9FA] p-6 md:p-12">
       {/* Header Section */}
       <div className="max-w-7xl mx-auto mb-8">
         <h1 className="text-2xl font-bold text-slate-800">

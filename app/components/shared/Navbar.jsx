@@ -71,7 +71,7 @@ export default function Navbar() {
         href="/register-mosque"
         className={`${isActive(
           "/register-mosque",
-        )} transition-colors font-light text-xl lg:hidden`}
+        )} transition-colors font-light text-xl md:hidden`}
       >
         Register Your Mosque
       </Link>
@@ -116,7 +116,7 @@ export default function Navbar() {
           </button>
         </div>
         {/* User Profile */}
-        <div className="flex lg:hidden items-center gap-3">
+        <div className="flex md:hidden items-center gap-3">
           <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-100 cursor-pointer shadow-sm">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
@@ -126,7 +126,7 @@ export default function Navbar() {
           </div>
         </div>
         {/* Auth Buttons */}
-        <div className="hidden lg:flex items-center gap-4 md:gap-6">
+        <div className="hidden md:flex items-center gap-4 md:gap-6">
           <Link
             href="/login"
             className="text-[#26FFA0] font-semibold text-lg md:text-xl"

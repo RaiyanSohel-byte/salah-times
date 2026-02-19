@@ -5,10 +5,10 @@ import React from "react";
 import { FaArrowLeft } from "react-icons/fa6";
 const ForgotPassword = () => {
   return (
-    <div className="w-full lg:w-1/2 flex items-center justify-center bg-white p-8 lg:p-16">
+    <div className="w-full md:w-1/2 flex items-center justify-center bg-white p-8 md:p-16">
       <div className="w-full max-w-md space-y-8">
         {/* Header */}
-        <div className="text-center lg:text-left">
+        <div className="text-center md:text-left">
           <h1 className="text-3xl font-bold text-[#1b9c5e]">
             Forgot Password?
           </h1>

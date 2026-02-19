@@ -53,11 +53,11 @@ export default function RegisterMosqueFlow() {
       {/* Hero Header Section */}
       <div className="py-[196px] text-center bg-gradient-to-b from-[#1F8A5B] to-[#1F6F8B] w-full">
         <h1
-          className={`font-bold text-4xl lg:text-[66px] text-white ${lato.className}`}
+          className={`font-bold text-4xl md:text-[66px] text-white ${lato.className}`}
         >
           <span className="text-[#26FFA0] italic">Register</span> Your Mosque
         </h1>
-        <p className={`lg:text-2xl text-[#D0E0FF] ${inter.className} mt-4`}>
+        <p className={`md:text-2xl text-[#D0E0FF] ${inter.className} mt-4`}>
           Join our platform and help your community stay connected
         </p>
       </div>
@@ -67,7 +67,7 @@ export default function RegisterMosqueFlow() {
         <div className="max-w-[840px] mx-auto bg-white rounded-[40px] shadow-[0_32px_64px_-12px_rgba(0,0,0,0.12)] p-8 md:p-14 border border-white/50">
           {/* STEPPER INDICATOR */}
           {step < 5 && (
-            <div className="flex items-start lg:items-center justify-between mb-16 max-w-[600px] mx-auto relative">
+            <div className="flex items-start md:items-center justify-between mb-16 max-w-[600px] mx-auto relative">
               <div className="absolute top-4 left-0 w-full h-[3px] bg-slate-100 -z-0 rounded-full" />
               <div
                 className="absolute top-4 left-0 h-[3px] bg-[#238B57] transition-all duration-700 ease-in-out -z-0 rounded-full"
@@ -77,7 +77,7 @@ export default function RegisterMosqueFlow() {
                 (label, idx) => (
                   <div
                     key={label}
-                    className="flex flex-col lg:items-center relative z-10 bg-white px-2"
+                    className="flex flex-col md:items-center relative z-10 bg-white px-2"
                   >
                     <div
                       className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 ${step >= idx + 1 ? "bg-[#238B57] text-white" : "bg-slate-100 text-slate-400"}`}
@@ -387,7 +387,7 @@ export default function RegisterMosqueFlow() {
 
       {/* --- FOOTER --- */}
       <footer className="bg-white border-t border-slate-100 pt-20 pb-10">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 md:grid-cols-4 gap-12 mb-16">
           <div>
             <div className="flex items-center gap-2 font-bold text-xl mb-6">
               <div className="w-8 h-8 bg-[#238B57] rounded-full flex items-center justify-center text-white text-lg">

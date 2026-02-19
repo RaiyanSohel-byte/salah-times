@@ -26,7 +26,7 @@ const TrustAndSecurity = () => {
       <h1 className="text-[#1E293B] text-[30px] font-semibold mb-6">
         Trust & Accuracy
       </h1>
-      <div className="grid grid-cols-1 lg:grid-cols-3">
+      <div className="grid grid-cols-1 md:grid-cols-3">
         {trusts.map((trust, index) => (
           <div key={index} className="max-w-[320px] mx-auto rounded-[16px]">
             <div className="bg-white w-16 h-16 rounded-full shadow-xl flex justify-center items-center mx-auto mb-4">

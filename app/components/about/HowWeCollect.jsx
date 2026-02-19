@@ -36,7 +36,7 @@ const HowWeCollect = () => {
       <h1 className="font-semibold text-[32px] mb-8 text-center">
         How We Collect Prayer Times
       </h1>
-      <div className="grid grid-cols-1 lg:grid-cols-4 max-w-[1216px] mx-auto gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-4 max-w-[1216px] mx-auto gap-6">
         {features.map((feature, index) => (
           <FeatureCard key={index} feature={feature} />
         ))}

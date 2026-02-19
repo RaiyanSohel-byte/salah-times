@@ -24,7 +24,7 @@ export default function FloatingChatButton() {
   ];
 
   return (
-    <div className="fixed bottom-18 lg:bottom-68 right-8 z-[100] flex flex-col items-end">
+    <div className="fixed bottom-18 md:bottom-68 right-8 z-[100] flex flex-col items-end">
       {/* Chat Window */}
       {isOpen && (
         <div className="mb-4 w-[340px] sm:w-[380px] bg-white rounded-2xl shadow-2xl overflow-hidden origin-bottom-right animate-in zoom-in-95 duration-200">

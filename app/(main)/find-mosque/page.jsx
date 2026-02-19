@@ -78,11 +78,11 @@ export default function FindMosque() {
       {/* Hero Header Section */}
       <div className="py-[196px] text-center bg-gradient-to-b from-[#1F8A5B] to-[#1F6F8B] w-full">
         <h1
-          className={`font-bold text-4xl lg:text-[66px] text-white ${lato.className}`}
+          className={`font-bold text-4xl md:text-[66px] text-white ${lato.className}`}
         >
           <span className="text-[#26FFA0] italic">Find</span> a Mosque
         </h1>
-        <p className={`lg:text-2xl text-[#D0E0FF] ${inter.className} mt-4`}>
+        <p className={`md:text-2xl text-[#D0E0FF] ${inter.className} mt-4`}>
           Discover mosques near you with accurate prayer times
         </p>
       </div>
@@ -120,9 +120,9 @@ export default function FindMosque() {
         </div>
 
         {/* Grid Layout: Map & Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
           {/* Left Column: Map View */}
-          <div className="lg:col-span-5 h-[400px] lg:h-[calc(100vh-320px)] lg:sticky lg:top-6 rounded-xl overflow-hidden shadow-sm border border-gray-100 bg-[#E5E3DF] relative">
+          <div className="md:col-span-5 h-[400px] md:h-[calc(100vh-320px)] md:sticky md:top-6 rounded-xl overflow-hidden shadow-sm border border-gray-100 bg-[#E5E3DF] relative">
             <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
             <div className="absolute top-4 left-4 bg-white px-3 py-1.5 rounded shadow text-xs font-medium text-[#1A73E8]">
               View larger map
@@ -146,7 +146,7 @@ export default function FindMosque() {
           </div>
 
           {/* Right Column: Mosque Cards */}
-          <div className="lg:col-span-7 space-y-4">
+          <div className="md:col-span-7 space-y-4">
             {mosques.map((mosque, index) => (
               <div
                 key={index}

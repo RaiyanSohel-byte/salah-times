@@ -106,7 +106,7 @@ const DashboardHome = () => {
           Today's Prayer Times
         </h2>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
           {prayerTimes.map((item, index) => (
             <div
               key={index}

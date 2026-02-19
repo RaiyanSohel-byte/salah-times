@@ -3,7 +3,7 @@ import React from "react";
 import logo from "../../../public/logo.png";
 const AuthLeftSide = () => {
   return (
-    <div className="hidden lg:flex w-1/2 flex-col items-center justify-center bg-gradient-to-b from-[#1b9c5e] to-[#0f4e68] relative">
+    <div className="hidden md:flex w-1/2 flex-col items-center justify-center bg-gradient-to-b from-[#1b9c5e] to-[#0f4e68] relative">
       <div className="relative w-80 h-80 rounded-full flex items-center justify-center">
         <Image
           src={logo}

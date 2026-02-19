@@ -54,7 +54,7 @@ const MosquesNearYou = () => {
     },
   ];
   return (
-    <div className="max-w-[1216px] mx-auto w-full lg:mt-80 px-4 lg:px-0">
+    <div className="max-w-[1216px] mx-auto w-full md:mt-80 px-4 md:px-0">
       <div className="flex justify-between items-center mb-8">
         <h3
           className={`text-[24px] font-semibold text-[#1E293B] ${poppins.className}`}

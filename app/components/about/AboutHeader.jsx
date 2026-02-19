@@ -12,11 +12,11 @@ const AboutHeader = () => {
   return (
     <div className="py-[196px] text-center bg-gradient-to-b from-[#1F8A5B] to-[#1F6F8B] w-full">
       <h1
-        className={`font-bold text-4xl lg:text-[66px] text-white ${lato.className}`}
+        className={`font-bold text-4xl md:text-[66px] text-white ${lato.className}`}
       >
         <span className="text-[#26FFA0] italic">About</span> Salaah-Times
       </h1>
-      <p className={`lg:text-2xl text-[#D0E0FF] ${inter.className} mt-4`}>
+      <p className={`md:text-2xl text-[#D0E0FF] ${inter.className} mt-4`}>
         Your reliable Islamic digital companion for accurate prayer times across
         <br />
         United Kingdom.
