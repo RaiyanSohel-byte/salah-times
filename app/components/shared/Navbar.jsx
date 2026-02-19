@@ -70,7 +70,7 @@ export default function Navbar() {
       <Link
         href="/register-mosque"
         className={`${isActive(
-          "/dashboard",
+          "/register-mosque",
         )} transition-colors font-light text-xl lg:hidden`}
       >
         Register Your Mosque
@@ -119,7 +119,7 @@ export default function Navbar() {
         <div className="flex lg:hidden items-center gap-3">
           <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-gray-100 cursor-pointer shadow-sm">
             <img
-              src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix"
+              src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
               alt="User profile"
               className="w-full h-full object-cover"
             />

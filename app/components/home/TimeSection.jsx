@@ -42,7 +42,7 @@ const TimeSection = () => {
   ];
   return (
     <div
-      className={`lg:w-[1216px] bg-white shadow-xl lg:rounded-2xl ${poppins.className} p-6 shadow-2xl mt-4 lg:mt-14`}
+      className={`lg:w-[1216px] bg-white lg:shadow-xl lg:rounded-2xl ${poppins.className} p-6 lg:shadow-2xl mt-4 lg:mt-14`}
     >
       <div className="lg:flex justify-between">
         <div>
