@@ -3,15 +3,17 @@
 import React, { useState } from "react";
 import {
   Check,
-  MessageCircle,
   Search,
   Filter,
   MapPin,
   Mail,
   Smartphone,
   Calendar,
+  ChevronDown,
+  Bell,
 } from "lucide-react";
 import { Inter, Lato } from "next/font/google";
+
 const inter = Inter({
   subsets: ["latin"],
 });
@@ -19,15 +21,14 @@ const lato = Lato({
   subsets: ["latin"],
   weight: ["400"],
 });
+
 // Mock Data
-const PRAYERS = ["Fajr", "Sunrise", "Dhuhr", "Asr", "Maghrib", "Isha"];
 const MOSQUES = [
   { id: 1, name: "Baitul Mukarram National Mosque", address: "Dhaka • 2.3 km" },
   { id: 2, name: "Gulshan Central Mosque", address: "Gulshan • 3.1 km" },
   { id: 3, name: "Mohammedpur Shia Mosque", address: "Mohammedpur • 5.0 km" },
 ];
 const DURATION_OPTIONS = [
-  { label: "1", sub: "Day", value: 1 },
   { label: "7", sub: "Days", value: 7 },
   { label: "15", sub: "Days", value: 15 },
   { label: "30", sub: "Days", value: 30 },
@@ -40,21 +41,20 @@ const PRAYER_LIST = [
   { id: "isha", name: "Isha", desc: "Night prayer notification" },
   { id: "jumuah", name: "Jumu'ah", desc: "Friday prayer reminder" },
 ];
+
 export default function SubscriptionFlow() {
   const [step, setStep] = useState(1);
   const [method, setMethod] = useState("whatsapp");
   const [selectedMosques, setSelectedMosques] = useState([1]);
   const [duration, setDuration] = useState(30);
-  const [preferences, setPreferences] = useState(
-    PRAYERS.reduce((acc, prayer) => {
-      acc[prayer] = true;
-      return acc;
-    }, {}),
-  );
+  const [reminderOffset, setReminderOffset] = useState("10");
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedPrayers, setSelectedPrayers] = useState(
     PRAYER_LIST.map((p) => p.id),
   );
+
   const isAllSelected = selectedPrayers.length === PRAYER_LIST.length;
+
   const getEndDate = () => {
     const date = new Date();
     date.setDate(date.getDate() + duration);
@@ -64,11 +64,13 @@ export default function SubscriptionFlow() {
       year: "numeric",
     });
   };
+
   const toggleMosque = (id) => {
     setSelectedMosques((prev) =>
       prev.includes(id) ? prev.filter((mId) => mId !== id) : [...prev, id],
     );
   };
+
   const toggleAll = () => {
     if (isAllSelected) setSelectedPrayers([]);
     else setSelectedPrayers(PRAYER_LIST.map((p) => p.id));
@@ -78,12 +80,6 @@ export default function SubscriptionFlow() {
     setSelectedPrayers((prev) =>
       prev.includes(id) ? prev.filter((p) => p !== id) : [...prev, id],
     );
-  };
-  const togglePreference = (prayer) => {
-    setPreferences((prev) => ({
-      ...prev,
-      [prayer]: !prev[prayer],
-    }));
   };
 
   const nextStep = () => setStep((prev) => Math.min(prev + 1, 4));
@@ -102,12 +98,12 @@ export default function SubscriptionFlow() {
           Never miss a prayer with automated notifications
         </p>
       </div>
+
       <main className="px-4 sm:px-6 mt-30">
         <div className="max-w-3xl mx-auto bg-white rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] p-6 md:p-10 border border-gray-50">
-          {/* STEPPER INDICATOR (Hide on Success step) */}
+          {/* STEPPER INDICATOR */}
           {step < 4 && (
             <div className="flex items-center justify-center mb-10 max-w-lg mx-auto">
-              {/* Step 1 */}
               <div className="flex flex-col items-center">
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${step >= 1 ? "bg-[#238B57] text-white" : "bg-gray-100 text-gray-400"}`}
@@ -124,7 +120,6 @@ export default function SubscriptionFlow() {
                 className={`flex-1 h-0.5 mx-4 transition-colors ${step >= 2 ? "bg-[#238B57]" : "bg-gray-200"}`}
               ></div>
 
-              {/* Step 2 */}
               <div className="flex flex-col items-center">
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${step >= 2 ? "bg-[#238B57] text-white" : "bg-gray-100 text-gray-400"}`}
@@ -141,7 +136,6 @@ export default function SubscriptionFlow() {
                 className={`flex-1 h-0.5 mx-4 transition-colors ${step >= 3 ? "bg-[#238B57]" : "bg-gray-200"}`}
               ></div>
 
-              {/* Step 3 */}
               <div className="flex flex-col items-center">
                 <div
                   className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${step >= 3 ? "bg-[#238B57] text-white" : "bg-gray-100 text-gray-400"}`}
@@ -166,7 +160,6 @@ export default function SubscriptionFlow() {
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-                {/* WhatsApp Option */}
                 <div
                   onClick={() => setMethod("whatsapp")}
                   className={`border-2 rounded-xl p-6 cursor-pointer transition-all ${method === "whatsapp" ? "border-[#238B57] bg-[#F2F9F5]" : "border-gray-100 hover:border-gray-200"}`}
@@ -182,7 +175,6 @@ export default function SubscriptionFlow() {
                   </p>
                 </div>
 
-                {/* Email Option */}
                 <div
                   onClick={() => setMethod("email")}
                   className={`border-2 rounded-xl p-6 cursor-pointer transition-all ${method === "email" ? "border-[#238B57] bg-[#F2F9F5]" : "border-gray-100 hover:border-gray-200"}`}
@@ -235,7 +227,6 @@ export default function SubscriptionFlow() {
                 Choose which mosques you want updates from.
               </p>
 
-              {/* Tools Bar */}
               <div className="flex flex-col sm:flex-row gap-3 mb-6">
                 <div className="relative flex-1">
                   <Search
@@ -256,7 +247,6 @@ export default function SubscriptionFlow() {
                 </button>
               </div>
 
-              {/* Mosques List */}
               <div className="space-y-3 mb-8">
                 {MOSQUES.map((mosque) => (
                   <div
@@ -277,7 +267,6 @@ export default function SubscriptionFlow() {
                         </p>
                       </div>
                     </div>
-                    {/* Checkbox representation */}
                     <div
                       className={`w-6 h-6 rounded-md border flex items-center justify-center transition-colors ${selectedMosques.includes(mosque.id) ? "bg-[#238B57] border-[#238B57] text-white" : "border-gray-300"}`}
                     >
@@ -289,7 +278,6 @@ export default function SubscriptionFlow() {
                 ))}
               </div>
 
-              {/* Navigation Actions */}
               <div className="flex gap-4">
                 <button
                   onClick={prevStep}
@@ -307,7 +295,7 @@ export default function SubscriptionFlow() {
             </div>
           )}
 
-          {/* ================= STEP 3: PREFERENCES (PIXEL PERFECT UPDATE) ================= */}
+          {/* ================= STEP 3: PREFERENCES ================= */}
           {step === 3 && (
             <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
               <h2 className="text-2xl font-bold text-slate-800 mb-1">
@@ -319,19 +307,69 @@ export default function SubscriptionFlow() {
 
               {/* Notification Duration Section */}
               <div className="bg-[#F6FBF9] border border-[#E8F5EE] rounded-2xl p-5 mb-8">
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="bg-[#238B57] p-1.5 rounded-lg text-white">
-                    <Calendar size={16} />
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center gap-2">
+                    <div className="bg-[#238B57] p-1.5 rounded-lg text-white">
+                      <Calendar size={16} />
+                    </div>
+                    <span className="text-sm font-bold text-slate-800">
+                      Notification Duration
+                    </span>
                   </div>
-                  <span className="text-sm font-bold text-slate-800">
-                    Notification Duration
-                  </span>
+
+                  {/* CUSTOM THEMED DROPDOWN */}
+                  <div className="relative">
+                    <button
+                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                      className="flex items-center gap-2 bg-white border border-gray-200 rounded-lg px-3 py-1.5 shadow-sm hover:border-[#238B57] transition-all"
+                    >
+                      <Bell size={14} className="text-[#238B57]" />
+                      <span className="text-[12px] font-bold text-slate-700">
+                        {reminderOffset} mins early
+                      </span>
+                      <ChevronDown
+                        size={12}
+                        className={`text-slate-400 transition-transform duration-200 ${isDropdownOpen ? "rotate-180" : ""}`}
+                      />
+                    </button>
+
+                    {isDropdownOpen && (
+                      <>
+                        <div
+                          className="fixed inset-0 z-10"
+                          onClick={() => setIsDropdownOpen(false)}
+                        ></div>
+                        <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-100 rounded-xl shadow-xl z-20 overflow-hidden animate-in fade-in zoom-in-95 duration-200 origin-top-right">
+                          {["10", "20", "30"].map((val) => (
+                            <div
+                              key={val}
+                              onClick={() => {
+                                setReminderOffset(val);
+                                setIsDropdownOpen(false);
+                              }}
+                              className={`flex items-center justify-between px-4 py-3 text-sm cursor-pointer transition-colors ${
+                                reminderOffset === val ?
+                                  "bg-[#F2F9F5] text-[#238B57] font-bold"
+                                : "text-slate-600 hover:bg-gray-50"
+                              }`}
+                            >
+                              <span>{val} minutes early</span>
+                              {reminderOffset === val && (
+                                <Check size={14} strokeWidth={3} />
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                      </>
+                    )}
+                  </div>
                 </div>
+
                 <p className="text-[13px] text-slate-500 mb-4">
                   How many days do you want to receive notifications?
                 </p>
 
-                <div className="grid grid-cols-4 gap-3 mb-5">
+                <div className="grid grid-cols-4 gap-3 mb-5 ">
                   {DURATION_OPTIONS.map((opt) => (
                     <button
                       key={opt.value}
@@ -352,14 +390,14 @@ export default function SubscriptionFlow() {
 
                 <div className="bg-white border border-gray-100 rounded-xl p-4">
                   <p className="text-xs font-bold text-slate-800">
-                    Selected Duration:{" "}
+                    Summary:{" "}
                     <span className="font-medium text-slate-600">
-                      {duration} days
+                      {duration} days • {reminderOffset}m offset
                     </span>
                   </p>
                   <p className="text-[11px] text-slate-400 mt-1">
-                    You will receive notifications from today until{" "}
-                    {getEndDate()}
+                    Notifications will arrive {reminderOffset} minutes before
+                    each prayer until {getEndDate()}.
                   </p>
                 </div>
               </div>
@@ -369,8 +407,6 @@ export default function SubscriptionFlow() {
                 <h3 className="text-sm font-bold text-slate-800 mb-4">
                   Select Prayers
                 </h3>
-
-                {/* All Prayers Toggle */}
                 <div
                   onClick={toggleAll}
                   className={`flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all ${isAllSelected ? "bg-[#E8F5EE] border-[#238B57]" : "bg-white border-gray-100"}`}
@@ -390,7 +426,6 @@ export default function SubscriptionFlow() {
                   )}
                 </div>
 
-                {/* Individual Prayers */}
                 {PRAYER_LIST.map((prayer) => (
                   <div
                     key={prayer.id}
@@ -414,7 +449,6 @@ export default function SubscriptionFlow() {
                 ))}
               </div>
 
-              {/* Action Buttons */}
               <div className="flex gap-4 mt-10">
                 <button
                   onClick={prevStep}
@@ -442,12 +476,12 @@ export default function SubscriptionFlow() {
                 Successfully Subscribed!
               </h2>
               <p className="text-sm text-slate-500 mb-8 max-w-sm mx-auto">
-                Alhamdulillah! You will now receive prayer time notifications
-                based on your selected preferences.
+                Alhamdulillah! You will now receive prayer time notifications{" "}
+                {reminderOffset} minutes before the adhan for the next{" "}
+                {duration} days.
               </p>
-
               <button
-                onClick={() => setStep(1)} // Reset for demo purposes, normally redirects
+                onClick={() => setStep(1)}
                 className="bg-[#238B57] hover:bg-[#1a6e44] text-white px-8 py-3.5 rounded-xl font-bold text-sm transition-colors shadow-sm"
               >
                 Back to Home

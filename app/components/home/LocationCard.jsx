@@ -18,7 +18,7 @@ export default function LocationCard() {
             <span className="text-white/60 text-xs md:text-sm font-medium">
               Current Location
             </span>
-            <button className=" text-white/80 text-xs flex items-center gap-1 hover:text-white">
+            <button className=" text-white/80 text-xs flex md:hidden items-center gap-1 hover:text-white">
               <MapPin size={12} /> Change
             </button>
           </div>
